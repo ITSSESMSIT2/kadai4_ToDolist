@@ -1,9 +1,4 @@
 <template>
-  <!-- PR1: このヘッダーを app/layouts/default.vue に移し、両ページで共通に使う -->
-  <header class="header">
-    <h1 class="title">進捗管理ボード</h1>
-  </header>
-
   <main class="container">
     <section class="hero">
       <h2 class="hero-title">タスクの進捗を管理する</h2>
@@ -18,20 +13,6 @@
 </template>
 
 <style scoped>
-.header {
-  display: flex;
-  align-items: center;
-  height: 64px;
-  padding: 0 var(--space-xl);
-  background: var(--primary);
-}
-
-.title {
-  margin: 0;
-  color: var(--surface);
-  font-size: 19px;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
