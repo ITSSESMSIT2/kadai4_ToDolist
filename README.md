@@ -1,18 +1,18 @@
-# Kadai_Dashboard_Nuxt（提出課題④ 進捗管理ボード / Nuxt版）
+# Kadai4_ToDolist（提出課題④ 進捗管理ボード / Nuxt版）
 
 タスクを登録して、期限とステータスで進捗を管理するアプリ。
 提出課題①（素のJavaScript）と同じ題材を、Nuxtで作り直す。
 
 ## 技術スタック
 
-| 種別 | 使用技術 |
-| --- | --- |
-| フレームワーク | Nuxt 4（`ssr: false` / 実PJT準拠） |
-| UI | Vue 3（Composition API / `<script setup>`） |
-| 言語 | TypeScript |
-| 状態管理 | Pinia（`@pinia/nuxt`） |
-| Node | 24.22.1（`.node-version` / `.nvmrc` で固定） |
-| 公開 | GitHub Pages（main へのマージで GitHub Actions が自動デプロイ） |
+| 種別           | 使用技術                                                        |
+| -------------- | --------------------------------------------------------------- |
+| フレームワーク | Nuxt 4（`ssr: false` / 実PJT準拠）                              |
+| UI             | Vue 3（Composition API / `<script setup>`）                     |
+| 言語           | TypeScript                                                      |
+| 状態管理       | Pinia（`@pinia/nuxt`）                                          |
+| Node           | 24.22.1（`.node-version` / `.nvmrc` で固定）                    |
+| 公開           | GitHub Pages（main へのマージで GitHub Actions が自動デプロイ） |
 
 ## セットアップ
 
@@ -23,11 +23,11 @@ yarn install
 
 ## 開発コマンド
 
-| コマンド | 内容 |
-| --- | --- |
-| `yarn dev` | 開発サーバーを起動する |
+| コマンド        | 内容                                              |
+| --------------- | ------------------------------------------------- |
+| `yarn dev`      | 開発サーバーを起動する                            |
 | `yarn generate` | 静的ビルド（GitHub Pages に公開されるものと同じ） |
-| `yarn preview` | ビルド結果をローカルで確認する |
+| `yarn preview`  | ビルド結果をローカルで確認する                    |
 
 ## リポジトリ構成
 
