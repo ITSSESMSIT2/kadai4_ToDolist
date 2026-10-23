@@ -9,7 +9,8 @@
       <h2 class="hero-title">タスクの進捗を管理する</h2>
 
       <!-- PR1: '/tasks' のページを作り、この button を NuxtLink に差し替える -->
-      <button class="hero-button" type="button" disabled>タスク一覧へ（PR1で有効化）</button>
+      <!-- <button class="hero-button" type="button" disabled>タスク一覧へ（PR1で有効化）</button> -->
+      <NuxtLink to="/tasks">タスク一覧へ</NuxtLink>
     </section>
 
     <!-- PR4: ステータス別の件数サマリ（未対応 / 処理中 / 完了）をここに追加する -->
