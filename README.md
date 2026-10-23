@@ -11,13 +11,13 @@
 | UI | Vue 3（Composition API / `<script setup>`） |
 | 言語 | TypeScript |
 | 状態管理 | Pinia（`@pinia/nuxt`） |
-| Node | 24.20.0（`.node-version` / `.nvmrc` で固定） |
+| Node | 24.22.1（`.node-version` / `.nvmrc` で固定） |
 | 公開 | GitHub Pages（main へのマージで GitHub Actions が自動デプロイ） |
 
 ## セットアップ
 
 ```bash
-nvm use        # .nvmrc の 24.20.0 に切り替える
+nvm use        # .nvmrc の 24.22.1 に切り替える
 yarn install
 ```
 
