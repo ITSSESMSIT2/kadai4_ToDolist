@@ -1,12 +1,23 @@
-<!-- タスク配列の形成。ステップ２実装時に編集-->
-
-<!-- <script setup lang="ts">
-import { useTaskStore } from "#imports";
+<template>
+  <tr>
+    <td>{{ props.task.name }}</td>
+    <td>{{ formatDate(props.task.limit) }}</td>
+    <td>{{ props.task.status }}</td>
+  </tr>
+</template>
+<script setup lang="ts">
 import type { Task } from "~/types";
-const useTask = useTaskStore();
+// フォームで親が受け取った値を、propsでさらに受け取る。
+const props = defineProps<{ task: Task }>();
 
-export const addTask = (value: Task) => {
-  useTask.taskArray.push(value);
-  return useTask.taskArray;
+// formatDateは表示用の関数なのでこちらに配置
+const formatDate = (element: string): string => {
+  const day = new Date(element);
+  const year = day.getFullYear();
+  const monthNum = String(day.getMonth() + 1);
+  const month = monthNum.padStart(2, "0");
+  const dateNum = String(day.getDate());
+  const date = dateNum.padStart(2, "0");
+  return `${year}/${month}/${date}`;
 };
-</script> -->
+</script>
