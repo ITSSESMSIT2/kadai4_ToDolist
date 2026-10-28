@@ -2,14 +2,27 @@
   <tr>
     <td>{{ props.task.name }}</td>
     <td>{{ formatDate(props.task.limit) }}</td>
-    <td>{{ formatStatus(props.task.status) }}</td>
+    <td>
+      <select>
+        <option>{{ formatStatus(props.task.status) }}</option>
+      </select>
+    </td>
+    <td>
+      <button @click="taskStore.deleteTask(props.task)">
+        <img
+          src="C:\Users\426711_black\202607Udemy研修\work\kadai4_ToDolist\app\assets\images\trash.svg"
+          alt="削除ボタン"
+        />
+      </button>
+    </td>
   </tr>
 </template>
 <script setup lang="ts">
 import type { Status, Task } from "~/types";
+import { useTaskStore } from "#imports";
 // フォームで親が受け取った値を、propsでさらに受け取る。
 const props = defineProps<{ task: Task }>();
-
+const taskStore = useTaskStore();
 // formatDateは表示用の関数なのでこちらに配置
 const formatDate = (element: string): string => {
   if (!element) {

@@ -10,9 +10,21 @@ export const useTaskStore = defineStore("useTaskStore", () => {
     taskId.value++;
   };
 
+  // elementのidを拾って、そのidの元のstatusを得たい。@changeで変えたい
+
+  // 削除のaction
+  const deleteTask = (element: Task) => {
+    const equalDeleteId = (e: Task) => {
+      e.id === element.id;
+    };
+    const deleteIndex = taskArray.value.findIndex(equalDeleteId);
+    taskArray.value.splice(deleteIndex, 1);
+  };
+
   return {
     taskId,
     taskArray,
     addTask,
+    deleteTask,
   };
 });
