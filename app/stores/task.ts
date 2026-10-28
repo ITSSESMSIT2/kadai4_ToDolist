@@ -32,9 +32,3 @@ export const useTaskStore = defineStore("useTaskStore", () => {
     addTask,
   };
 });
-
-// storeで管理する項目とそのトリガーを整理
-// 入力したそれをすぐ入れる→処理が増える
-// inputで入ったものをどこで管理？取り出せるようにしておく
-// ↑を取り出して、submitでstoreの
-// 初期値やトップの日はいつにする？にも対応できる
