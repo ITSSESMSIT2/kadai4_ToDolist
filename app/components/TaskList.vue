@@ -6,10 +6,12 @@
   <template v-else>
     <table>
       <thead>
-        <th>タスク名</th>
-        <th>期限</th>
-        <th>ステータス</th>
-        <th>操作</th>
+        <tr>
+          <th>タスク名</th>
+          <th>期限</th>
+          <th>ステータス</th>
+          <th>操作</th>
+        </tr>
       </thead>
       <tbody>
         <TaskItem
