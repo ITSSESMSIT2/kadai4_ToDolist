@@ -8,6 +8,20 @@ export const useTaskStore = defineStore("useTaskStore", () => {
   const taskDate = ref<string>("");
   const status = ref<Status>("pending");
   const taskArray = ref<Task[]>([]);
+  const addTask = () => {
+    if (taskName.value.trim() !== "") {
+      const newTask: Task = {
+        id: taskId.value,
+        name: taskName.value,
+        limit: taskDate.value,
+        status: status.value,
+      };
+      taskArray.value.push(newTask);
+      taskId.value++;
+    } else {
+      alert("タスク名は必須です");
+    }
+  };
 
   return {
     taskId,
@@ -15,5 +29,6 @@ export const useTaskStore = defineStore("useTaskStore", () => {
     taskDate,
     status,
     taskArray,
+    addTask,
   };
 });
