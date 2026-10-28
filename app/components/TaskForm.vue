@@ -1,9 +1,14 @@
 <template>
   <h2>新規タスクを追加</h2>
-  <form>
+  <form @submit.prevent="resetForm()">
     <div>
       <label for="taskNameInput">タスク名<span class="must">必須</span></label>
-      <input type="text" v-model="taskStore.taskName" id="taskNameInput" />
+      <input
+        type="text"
+        id="taskNameInput"
+        v-model="taskStore.taskName"
+        placeholder="例）API設計ドキュメントを書く"
+      />
     </div>
 
     <div>
@@ -19,25 +24,31 @@
         <option value="done">完了</option>
       </select>
     </div>
-    <button @submit="taskStore.addTask()">ボタン</button>
+    <button @click="addTask()">追加</button>
   </form>
 </template>
 
 <script setup lang="ts">
 import { useTaskStore } from "#imports";
-import type { Status, Task } from "~/types";
+import type { Task } from "~/types";
 const taskStore = useTaskStore();
-// ユーザーの入力値をTask型にできる関数を作成する→コンストラクタ関数？
-const inputTask = (id: number, name: string, limit: string, status: Status) => {
-  this.id = id;
-  this.name = name;
-  this.limit = limit;
-  this.status = status;
+const addTask = () => {
+  if (taskStore.taskName.trim() !== "") {
+    const newTask: Task = {
+      id: taskStore.taskId,
+      name: taskStore.taskName,
+      limit: taskStore.taskDate,
+      status: taskStore.status,
+    };
+    taskStore.taskArray.push(newTask);
+    taskStore.taskId++;
+  } else {
+    alert("タスク名は必須です");
+  }
 };
-const newTask = new inputTask(
-  taskStore.taskId,
-  taskStore.taskName,
-  taskStore.taskDate,
-  taskStore.status,
-);
+const resetForm = () => {
+  taskStore.taskName = "";
+  taskStore.taskDate = "";
+  taskStore.status = "pending";
+};
 </script>
