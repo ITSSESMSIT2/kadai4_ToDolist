@@ -24,28 +24,13 @@
         <option value="done">完了</option>
       </select>
     </div>
-    <button @click="addTask()">追加</button>
+    <button @click="taskStore.addTask()">追加</button>
   </form>
 </template>
 
 <script setup lang="ts">
 import { useTaskStore } from "#imports";
-import type { Task } from "~/types";
 const taskStore = useTaskStore();
-const addTask = () => {
-  if (taskStore.taskName.trim() !== "") {
-    const newTask: Task = {
-      id: taskStore.taskId,
-      name: taskStore.taskName,
-      limit: taskStore.taskDate,
-      status: taskStore.status,
-    };
-    taskStore.taskArray.push(newTask);
-    taskStore.taskId++;
-  } else {
-    alert("タスク名は必須です");
-  }
-};
 const resetForm = () => {
   taskStore.taskName = "";
   taskStore.taskDate = "";
