@@ -3,10 +3,15 @@
   <div>
     <header class="header">
       <h1 class="title">進捗管理ボード</h1>
+      <nav class="nav">
+        <NuxtLink to="/">トップ</NuxtLink>
+        <NuxtLink to="/tasks">タスク一覧</NuxtLink>
+      </nav>
     </header>
     <slot />
   </div>
 </template>
+
 <style scoped>
 .header {
   display: flex;
@@ -20,5 +25,13 @@
   margin: 0;
   color: var(--surface);
   font-size: 19px;
+}
+.nav {
+  display: flex;
+  gap: var(--space-md);
+  margin-left: auto;
+}
+.nav a {
+  color: var(--surface);
 }
 </style>
