@@ -19,9 +19,11 @@
     <div>
       <label for="statusInput">ステータス</label>
       <select id="statusInput" v-model="status">
-        <option value="pending">未対応</option>
-        <option value="progress">処理中</option>
-        <option value="done">完了</option>
+        <!-- ここで選択された値をどこのstoreで管理している？ -->
+        <!-- このvalueが結局v-modelに渡す値 -->
+        <option v-for="state in STATUSES" :key="state" :value="state">
+          {{ state }}
+        </option>
       </select>
     </div>
     <button type="submit">追加</button>
@@ -30,6 +32,7 @@
 
 <script setup lang="ts">
 import { useTaskStore } from "#imports";
+import { STATUSES } from "~/types";
 import type { Status } from "~/types";
 const taskStore = useTaskStore();
 const taskName = ref<string>("");
