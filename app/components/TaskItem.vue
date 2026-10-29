@@ -3,8 +3,14 @@
     <td>{{ props.task.name }}</td>
     <td>{{ formatDate(props.task.limit) }}</td>
     <td>
-      <select>
-        <option>{{ formatStatus(props.task.status) }}</option>
+      <!-- v-model→もともとの紐づけ場所 -->
+      <!-- optionの中でpropsの値がoptionのstateと===するかどうか -->
+      <!-- 書き方を失敗しているだけでoptionにselectedを付ける手法もある。 -->
+      <!-- v-model="props.task.status"を使うと、store外なのにstoreで扱う本体のtaskArrayを書き換えてしまう -->
+      <select @change="" :value="props.task.status">
+        <option v-for="state in STATUSES" :key="state" :value="state">
+          {{ formatStatus(state) }}
+        </option>
       </select>
     </td>
     <td>
@@ -18,7 +24,7 @@
   </tr>
 </template>
 <script setup lang="ts">
-import type { Status, Task } from "~/types";
+import { STATUSES, type Status, type Task } from "~/types";
 import { useTaskStore } from "#imports";
 // フォームで親が受け取った値を、propsでさらに受け取る。
 const props = defineProps<{ task: Task }>();
