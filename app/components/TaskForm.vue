@@ -1,39 +1,52 @@
 <template>
   <h2>新規タスクを追加</h2>
-  <form @submit.prevent="resetForm()">
+  <form @submit.prevent="submitTask">
     <div>
       <label for="taskNameInput">タスク名<span class="must">必須</span></label>
       <input
         type="text"
         id="taskNameInput"
-        v-model="taskStore.taskName"
+        v-model="taskName"
         placeholder="例）API設計ドキュメントを書く"
       />
     </div>
 
     <div>
       <label for="limitInput">期限</label>
-      <input type="date" id="limitInput" v-model="taskStore.taskDate" />
+      <input type="date" id="limitInput" v-model="taskDate" />
     </div>
 
     <div>
       <label for="statusInput">ステータス</label>
-      <select id="statusInput" v-model="taskStore.status">
+      <select id="statusInput" v-model="status">
         <option value="pending">未対応</option>
         <option value="progress">処理中</option>
         <option value="done">完了</option>
       </select>
     </div>
-    <button @click="taskStore.addTask()">追加</button>
+    <button type="submit">追加</button>
   </form>
 </template>
 
 <script setup lang="ts">
 import { useTaskStore } from "#imports";
+import type { Task, Status } from "~/types";
 const taskStore = useTaskStore();
-const resetForm = () => {
-  taskStore.taskName = "";
-  taskStore.taskDate = "";
-  taskStore.status = "pending";
+const taskName = ref<string>("");
+const taskDate = ref<string>("");
+const status = ref<Status>("pending");
+const submitTask = () => {
+  if (taskName.value.trim() === "") {
+    alert("タスク名は必須です");
+    return;
+  }
+  taskStore.addTask({
+    name: taskName.value,
+    limit: taskDate.value,
+    status: status.value,
+  });
+  taskName.value = "";
+  taskDate.value = "";
+  status.value = "pending";
 };
 </script>
