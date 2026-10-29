@@ -230,3 +230,9 @@ main にマージされると `.github/workflows/deploy.yml` が動き、`yarn g
   // 変数から型を抽出するtypeofを利用
   export type Status = (typeof STATUSES)[number];
   ```
+
+- selectにvalueを付けるとどうなる？→初期値が入れられる。　v-ifにkey
+- optionにselectedを付けるとどうなる？→選択される　optionのvalueは必須
+- なぜv-modelをvalueに指定してはいけない？→双方向バインディング、propsは欲しいけどemitは＠changeでできている
+- .splice（）を使った意図は？
+-
