@@ -1,16 +1,63 @@
-<!-- タスク追加用のフォームの機能　STEP2にて実装 -->
 <template>
   <h2>新規タスクを追加</h2>
-  <div>
-    <label for="taskNameInput">タスク名<span class="must">必須</span></label>
-    <input type="text" id="taskNameInput" />
-    <label for="limitInput">期限</label>
-    <input type="date" id="limitInput" />
-    <label for="statusInput">ステータス</label>
-    <select id="statusInput">
-      <option value="pending">未対応</option>
-      <option value="progress">処理中</option>
-      <option value="done">完了</option>
-    </select>
-  </div>
+  <form @submit.prevent="submitTask">
+    <div>
+      <label for="taskNameInput">タスク名<span class="must">必須</span></label>
+      <input
+        type="text"
+        id="taskNameInput"
+        v-model="taskName"
+        placeholder="例）API設計ドキュメントを書く"
+      />
+    </div>
+
+    <div>
+      <label for="limitInput">期限</label>
+      <input type="date" id="limitInput" v-model="taskDate" />
+    </div>
+
+    <div>
+      <label for="statusInput">ステータス</label>
+      <select id="statusInput" v-model="status">
+        <option value="pending">未対応</option>
+        <option value="progress">処理中</option>
+        <option value="done">完了</option>
+      </select>
+    </div>
+    <button type="submit">追加</button>
+  </form>
 </template>
+
+<script setup lang="ts">
+import { useTaskStore } from "#imports";
+import type { Status } from "~/types";
+const taskStore = useTaskStore();
+const taskName = ref<string>("");
+const toDay = new Date()
+  .toLocaleDateString("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  })
+  .replaceAll("/", "-");
+const taskDate = ref<string>(toDay);
+const status = ref<Status>("pending");
+const submitTask = () => {
+  if (taskName.value.trim() === "") {
+    alert("タスク名は必須です");
+    return;
+  }
+  taskStore.addTask({
+    name: taskName.value,
+    limit: taskDate.value,
+    status: status.value,
+  });
+  taskName.value = "";
+  taskDate.value = toDay;
+  status.value = "pending";
+  console.log(taskName.value);
+  console.log(taskDate.value);
+  console.log(status.value);
+};
+</script>
