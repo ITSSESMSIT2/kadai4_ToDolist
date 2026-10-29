@@ -215,3 +215,18 @@ main にマージされると `.github/workflows/deploy.yml` が動き、`yarn g
 
 - min属性
   `<input type="date">`に付与することで、指定した日付以前の日付を選択できなくなる。課題③で学んだ、本日の日付を文字列で取得する`.toLocaleDateString`と組み合わせ利用する。実装するかどうかはSTEP4にてご相談
+
+### 【STEP3】
+
+- as const<br>
+  変数宣言の末尾に付与することで、その変数をreadonlyにしたうえで、リテラル型（自分の決めた型）にしてくれる。
+- typeof<br>
+  変数の前につける型演算子。今回as constと一緒に利用しており、利用例は以下の通り。
+  なお、`[number]`になっているのは、型を作るときに、配列から参照するため。配列の内容を参照するためのインデックス番号が`[number]`に入っている。この`[number]`をこちらが触ることはない。
+
+  ```js
+  // 通常の配列の宣言のように、型を三つ用意し、末尾にas constを付けることでreadonlyなリテラル型を用意
+  export const STATUSES = ["pending", "progress", "done"] as const;
+  // 変数から型を抽出するtypeofを利用
+  export type Status = (typeof STATUSES)[number];
+  ```
