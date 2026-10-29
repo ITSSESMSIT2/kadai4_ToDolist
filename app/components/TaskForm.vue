@@ -30,10 +30,18 @@
 
 <script setup lang="ts">
 import { useTaskStore } from "#imports";
-import type { Task, Status } from "~/types";
+import type { Status } from "~/types";
 const taskStore = useTaskStore();
 const taskName = ref<string>("");
-const taskDate = ref<string>("");
+const toDay = new Date()
+  .toLocaleDateString("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  })
+  .replaceAll("/", "-");
+const taskDate = ref<string>(toDay);
 const status = ref<Status>("pending");
 const submitTask = () => {
   if (taskName.value.trim() === "") {
@@ -46,7 +54,10 @@ const submitTask = () => {
     status: status.value,
   });
   taskName.value = "";
-  taskDate.value = "";
+  taskDate.value = toDay;
   status.value = "pending";
+  console.log(taskName.value);
+  console.log(taskDate.value);
+  console.log(status.value);
 };
 </script>

@@ -212,3 +212,6 @@ main にマージされると `.github/workflows/deploy.yml` が動き、`yarn g
     taskId++
   }
   ```
+
+- min属性
+  `<input type="date">`に付与することで、指定した日付以前の日付を選択できなくなる。課題③で学んだ、本日の日付を文字列で取得する`.toLocaleDateString`と組み合わせ利用する。実装するかどうかはSTEP4にてご相談
