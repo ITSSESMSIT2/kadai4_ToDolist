@@ -2,13 +2,33 @@
   <tr>
     <td>{{ props.task.name }}</td>
     <td>{{ formatDate(props.task.limit) }}</td>
-    <td>{{ formatStatus(props.task.status) }}</td>
+    <td>
+      <select
+        :value="newStatus"
+        @change="taskStore.changeStatus(props.task, newStatus)"
+      >
+        <option v-for="state in STATUSES" :key="state" :value="state">
+          {{ formatStatus(state) }}
+        </option>
+      </select>
+    </td>
+    <td>
+      <button @click="taskStore.deleteTask(props.task)">
+        <img
+          src="C:\Users\426711_black\202607Udemy研修\work\kadai4_ToDolist\app\assets\images\trash.svg"
+          alt="削除ボタン"
+        />
+      </button>
+    </td>
   </tr>
 </template>
 <script setup lang="ts">
-import type { Status, Task } from "~/types";
+import { STATUSES, type Status, type Task } from "~/types";
+import { useTaskStore } from "#imports";
 // フォームで親が受け取った値を、propsでさらに受け取る。
 const props = defineProps<{ task: Task }>();
+const taskStore = useTaskStore();
+const newStatus = ref<Status>(props.task.status);
 
 // formatDateは表示用の関数なのでこちらに配置
 const formatDate = (element: string): string => {
