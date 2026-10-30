@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { Task } from "~/types";
+import type { Task, Status } from "~/types";
 
 export const useTaskStore = defineStore("useTaskStore", () => {
-  const taskId = ref<number>(0);
+  const taskId = ref<number>(1);
   const taskArray = ref<Task[]>([]);
   const addTask = (task: Omit<Task, "id">) => {
     taskArray.value.push({ ...task, id: taskId.value });
@@ -12,18 +12,19 @@ export const useTaskStore = defineStore("useTaskStore", () => {
 
   // 更新のaction
 
-  const changeStatus = (element: Task) => {
+  const changeStatus = (oldElement: Task, newStatus: Status) => {
     const equalChangeId = (e: Task) => {
-      return e.id === element.id;
+      return e.id === oldElement.id;
     };
     const changeIndex = taskArray.value.findIndex(equalChangeId);
-    // 上記までで変えたい要素のインデックスまで拾えている
-    console.log(changeIndex);
-    // taskArray[changeIndex].value.task.status = element.status;
+    if (!taskArray.value[changeIndex]) {
+      return;
+    } else {
+      taskArray.value[changeIndex].status = newStatus;
+    }
   };
 
   // 削除のaction
-  // elementの中に入るのはprops.task→クリックされたタスク
   const deleteTask = (element: Task) => {
     const equalDeleteId = (e: Task) => {
       return e.id === element.id;
@@ -31,12 +32,12 @@ export const useTaskStore = defineStore("useTaskStore", () => {
     const deleteIndex = taskArray.value.findIndex(equalDeleteId);
     taskArray.value.splice(deleteIndex, 1);
   };
-  // 今回は元の配列を破壊して問題ないのでsplice?
 
   return {
     taskId,
     taskArray,
     addTask,
+    changeStatus,
     deleteTask,
   };
 });
