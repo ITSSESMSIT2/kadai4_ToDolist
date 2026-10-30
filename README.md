@@ -231,8 +231,15 @@ main にマージされると `.github/workflows/deploy.yml` が動き、`yarn g
   export type Status = (typeof STATUSES)[number];
   ```
 
-- selectにvalueを付けるとどうなる？→初期値が入れられる。　v-ifにkey
-- optionにselectedを付けるとどうなる？→選択される　optionのvalueは必須
-- なぜv-modelをvalueに指定してはいけない？→双方向バインディング、propsは欲しいけどemitは＠changeでできている
-- .splice（）を使った意図は？
--
+- `<select>`にvalueを付ける<br>
+  →選択されたvalueの値を保持することができる。
+
+- `<option>`にselectedを付ける<br>
+  →選択された状態にすることができる。なお、`<option>`におけるvalueは必須である。（選択された値の内容はvalueが持っているため。）
+
+- なぜv-modelをvalueに指定してはいけない？<br>
+  双方向バインディングが行われるため。v-modelでは、いわば値の同期のためにpropsとemitの両方が行われている状態である。今回の場合、値の変更はすべてstoreに持たせるため、propsは欲しいけれどemitは不要。
+  そのため、今回の値の変化の読み取り方にv-modelを利用するのは不適切となる。（中の値の変更を勝手に行ってしまう）
+
+- .splice（）の利用<br>
+  今回の実装においては、データ元の配列の中身を不可逆的に削除、変更してもよいため、削除のメソッドに破壊的メソッドである.splice()を利用。また、値の変更の際は配列の中身を書き換えるというよりは、該当のインデックスを持つオブジェクトの中身を書き換える手段で実装した。その際、statusの新しい入力値を受け取るためにref()を用意した。このrefを作成するまで、さらに引数としてrefの値をchangeStatusに渡すという発想に至るまでに大きく時間を割いている。
