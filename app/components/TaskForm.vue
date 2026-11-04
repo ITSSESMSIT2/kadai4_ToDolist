@@ -20,7 +20,7 @@
       <label for="statusInput">ステータス</label>
       <select id="statusInput" v-model="status">
         <option v-for="state in STATUSES" :key="state" :value="state">
-          {{ STATUS_LABELS[status] }}
+          {{ STATUS_LABELS[state] }}
         </option>
       </select>
     </div>
