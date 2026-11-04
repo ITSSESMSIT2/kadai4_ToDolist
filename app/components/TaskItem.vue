@@ -3,12 +3,9 @@
     <td>{{ props.task.name }}</td>
     <td>{{ formatDate(props.task.limit) }}</td>
     <td>
-      <select
-        :value="newStatus"
-        @change="taskStore.changeStatus(props.task, newStatus)"
-      >
+      <select :value="props.task.status" @change="onChangeStatus">
         <option v-for="state in STATUSES" :key="state" :value="state">
-          {{ formatStatus(state) }}
+          {{ STATUS_LABELS[state] }}
         </option>
       </select>
     </td>
@@ -20,12 +17,11 @@
   </tr>
 </template>
 <script setup lang="ts">
-import { STATUSES, type Status, type Task } from "~/types";
+import { STATUSES, type Status, type Task, STATUS_LABELS } from "~/types";
 import { useTaskStore } from "#imports";
 // フォームで親が受け取った値を、propsでさらに受け取る。
 const props = defineProps<{ task: Task }>();
 const taskStore = useTaskStore();
-const newStatus = ref<Status>(props.task.status);
 
 // formatDateは表示用の関数なのでこちらに配置
 const formatDate = (element: string): string => {
@@ -41,14 +37,10 @@ const formatDate = (element: string): string => {
     return `${year}/${month}/${date}`;
   }
 };
-// ステータスの表示用
-const formatStatus = (element: Status) => {
-  if (element === "pending") {
-    return "未対応";
-  } else if (element === "progress") {
-    return "処理中";
-  } else {
-    return "完了";
-  }
+
+// storeのchangeStatusを呼び出す関数を作成
+const onChangeStatus = (event: Event) => {
+  const select = event.target as HTMLSelectElement;
+  taskStore.changeStatus(props.task.id, select.value as Status);
 };
 </script>
