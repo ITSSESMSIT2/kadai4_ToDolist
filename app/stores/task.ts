@@ -11,16 +11,12 @@ export const useTaskStore = defineStore("useTaskStore", () => {
   };
 
   // 更新のaction
-
-  const changeStatus = (oldElement: Task, newStatus: Status) => {
-    const equalChangeId = (e: Task) => {
-      return e.id === oldElement.id;
-    };
-    const changeIndex = taskArray.value.findIndex(equalChangeId);
-    if (!taskArray.value[changeIndex]) {
+  const changeStatus = (id: number, newStatus: Status) => {
+    const target = taskArray.value.find((e) => e.id === id);
+    if (!target) {
       return;
     } else {
-      taskArray.value[changeIndex].status = newStatus;
+      target.status = newStatus;
     }
   };
 
@@ -30,7 +26,11 @@ export const useTaskStore = defineStore("useTaskStore", () => {
       return e.id === element.id;
     };
     const deleteIndex = taskArray.value.findIndex(equalDeleteId);
-    taskArray.value.splice(deleteIndex, 1);
+    if (deleteIndex === -1) {
+      return;
+    } else {
+      taskArray.value.splice(deleteIndex, 1);
+    }
   };
 
   return {
