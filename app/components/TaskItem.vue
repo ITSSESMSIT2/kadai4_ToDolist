@@ -14,10 +14,7 @@
     </td>
     <td>
       <button @click="taskStore.deleteTask(props.task)">
-        <img
-          src="C:\Users\426711_black\202607Udemy研修\work\kadai4_ToDolist\app\assets\images\trash.svg"
-          alt="削除ボタン"
-        />
+        <img src="~\..\app\assets\images\trash.svg" alt="削除ボタン" />
       </button>
     </td>
   </tr>
