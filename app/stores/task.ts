@@ -27,7 +27,6 @@ export const useTaskStore = defineStore("useTaskStore", () => {
       return;
     } else {
       taskArray.value.splice(target, 1);
-      console.log(taskArray.value);
     }
   };
 
