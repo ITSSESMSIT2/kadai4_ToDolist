@@ -10,8 +10,8 @@
       </select>
     </td>
     <td>
-      <button @click="taskStore.deleteTask(props.task)">
-        <img src="~\..\app\assets\images\trash.svg" alt="削除ボタン" />
+      <button @click="taskStore.deleteTask(props.task.id)">
+        <img src="~/assets/images/trash.svg" alt="削除ボタン" />
       </button>
     </td>
   </tr>
