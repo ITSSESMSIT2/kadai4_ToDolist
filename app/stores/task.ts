@@ -21,15 +21,13 @@ export const useTaskStore = defineStore("useTaskStore", () => {
   };
 
   // 削除のaction
-  const deleteTask = (element: Task) => {
-    const equalDeleteId = (e: Task) => {
-      return e.id === element.id;
-    };
-    const deleteIndex = taskArray.value.findIndex(equalDeleteId);
-    if (deleteIndex === -1) {
+  const deleteTask = (id: number) => {
+    const target = taskArray.value.findIndex((e) => e.id === id);
+    if (target === -1) {
       return;
     } else {
-      taskArray.value.splice(deleteIndex, 1);
+      taskArray.value.splice(target, 1);
+      console.log(taskArray.value);
     }
   };
 
