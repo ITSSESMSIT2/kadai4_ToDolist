@@ -34,8 +34,23 @@ yarn install
 ```
 .github/workflows/deploy.yml  main へのpushでビルドしGitHub Pagesへ公開
 app/
-  assets/styles/tokens.css    デザイントークン（色・余白・角丸・影）
-  pages/                      ページ。ファイル名がそのままURLになる
+  assets/
+    images/trash.svg     削除ボタンの画像
+    styles/tokens.css    デザイントークン（色・余白・角丸・影）
+  components/
+    TaskForm.vue         新規タスクを登録するためのフォーム
+    TaskItem.vue         タスク一件あたりの表示、ステータス変更、削除の機能をもつ
+    TaskList.vue         タスク一覧の表示
+  layouts/
+    default.vue          共通して利用するヘッダー
+  pages/                 ページ。ファイル名がそのままURLになる
+    index.vue            トップページ。タスク一覧ページへ遷移できる
+    tasks.vue            タスク一覧ページ（componentsの内容を表示）
+  stores/
+    task.ts              データの本体であるTaskArray、およびそれを直接変更しうる関数などをもつ
+  types/
+    index.ts             Task型、Status型、ステータスの表示をもつ
+  app.vue                レイアウト・ページを表示する入り口
 nuxt.config.ts                ssr:false / Pinia / baseURL などの設定
 public/                       静的ファイル（ビルドされずそのまま配信される）
 ```
